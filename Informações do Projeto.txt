@@ -1,0 +1,20 @@
+Projeto de Microsserviços - 
+
+1 - Criado projeto Spring Start Project, no STS, selecionando as dependências Spring Web, JPA e H2.
+- Criado repositório no Git e feito commit do projeto criado 
+
+2 - Criado a classe Worker, com os atributos, construtor padrão, com parâmetros, getters e setters, no pacote entities.
+- Criado a interface WorkerRepository, no pacote repositories. Essa interface extende a interface JPARepository.
+- Na classe Worker, adicionado as anotações do JPA: @Entity, @Table, @Id, @GeneratedValue
+
+- No arquivo properties, adicionado parâmetros para rodar o banco de dados H2.
+- Criado um arquivo data.sql para povoar o banco de dados tb_worker no banco de dados H2.
+
+- Criado o pacote controllers, adicionando a classe WorkerController.
+- Nessa classe foi criado os endpoints e as annotations:
+    * @RestController -> para informar ao spring que é uma classe restcontroller
+    * @RequestMapping -> infomar o caminho do endpoint
+    * @Autowired -> injenção de dependência do WorkerRepository
+    * @GetMapping -> informa que é um método GET do HTTP
+    * @PathVariable -> para casar o parâmetro passado no método findById com o caminho do @GetMapping(value = "{/id})
+
