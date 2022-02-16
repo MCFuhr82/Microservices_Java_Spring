@@ -18,3 +18,33 @@ Projeto de Microsserviços -
     * @GetMapping -> informa que é um método GET do HTTP
     * @PathVariable -> para casar o parâmetro passado no método findById com o caminho do @GetMapping(value = "{/id})
 
+3 - Criado um novo projeto. Cada Microsserviços é um projeto novo do Spring Boot.
+- Criado projeto hr-payroll (folha de pagameto), selecionando apenas a dependência Spring Web.
+
+4 - Criado um pacote entities, e a classe Payment, com os atributos, construtor padrão e com parametros e getters e setters.
+- Criado método getTotal() na classe Payment.
+- Criado um serviço para instanciar um Payment. Pacote services, classe PaymentService.
+    * Pq foi criado um service e não um repository? Pq esse projeto não tem banco de dados, apenas regras de negócio.
+    * Annotation @Service, para informar para o Spring que essa classe é uma service.
+    * Criado um método para instanciar um pagamento(Payment), recebendo um long, que é o Id do trabalhador(workerId) e um inteiro, que são os dias trabalhados.
+    * Esse workerId será buscado no Microsserviço hr-worker.
+    * Para a didática da implementação, será instanciado um objeto mocado.
+    * Para testar, será criado um resource/controller para liberar um endpoint.
+- Criado um pacote controllers, e uma classe PaymentController
+- Annotations na classe:
+    * @RestController -> para informar ao spring que é uma classe restcontroller
+    * @RequestMapping -> infomar o caminho do endpoint
+    * @Autowired -> injenção de dependência do PaymentService
+    * @GetMapping -> informa que é um método GET do HTTP
+        ** como value será informado o "/{workerId}/days/{days}"
+        ** método retonnará um Payment, recebendo as duas variáveis
+    @PathVariable -> para casar o parâmetro passado no método getPayment com o caminho do @GetMapping(value = "/{workerId}/days/{days}")
+- criar um novo objeto payment, passando o workerId e o days.
+- retorna um ResponseEntity.ok(payment), ou seja, passando o objeto criado.
+
+- No arquivo properties, colocado o nome da aplicação e o número da porta apenas.
+
+- No Postman, testar com o seguinte caminho: http://localhost:8101/payments/1/days/5
+- Pode mudar o número do id, que sempre retornará a mesma pessoa, já que foi um objeto mocado.
+
+
