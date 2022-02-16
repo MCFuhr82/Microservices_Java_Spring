@@ -76,7 +76,31 @@ Projeto de Microsserviços -
  - Como passar parametros numa requisição RestTemplate, usando getForObject?
     * tem que criar um mapa, ou dicionário de parametros. Usar a classe Map, collections de chave e valor.
     * Map<String, String> -> String String pq os parametros de HTTP são apenas Strings.
-    
+
+6 - Feign, compoente do Spring Cloud -> forma alternativa de integrar um projeto com o outro.
+- Com o botão direito no projeto payroll, Spring, add Starter -> para adicionar dependencia do Feign
+- Adicionar a annotation @EnableFeignClients na classe principal
+- Para fazer uma comunicação entre projetos usando Feign, declarar uma interface com as assinaturas das requisições que possam ser feitas.
+- Fica muito mais limpo do que usando o RestTemplate e o Feign fica integrado com as outras ferramentos do Spring Cloud.
+
+- Criar uma interface (WorkerFeignClient) no pacote feignclients.
+- Adicionar as annotations @Component e @FeignClient(passando, por enquanto, paramentros hardcode)
+    * name = "hr-worker" -> esse é o nome do projeto que vamos buscar, nome do Microsserviço
+    * url = "localhost:8001" -> por hora, parametro adicionado na mão, hardcode
+    * path = "/workers" -> da mesma forma, hardcode
+- Adicionado o @GetMapping na interface
+
+- Refatorar o PaymentService. No lugar de RestTemplate, usará o Feign.
+- Excluir o @Autowired do RestTemplate
+- Exluir o private workerHost
+- Adicionar a injeção para o WorkerFeignClient
+- Pode apagar o workerHost no arquivo .properties também. Não será mais usado.
+- Pode apagar o Map do método também. Não precisará mais.
+- Lembrar de usar o .getBody(), para pegar o corpo do objeto ResponseEntity.
+
+
+
+
 
 
 
