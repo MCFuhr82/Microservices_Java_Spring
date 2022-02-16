@@ -47,4 +47,36 @@ Projeto de Microsserviços -
 - No Postman, testar com o seguinte caminho: http://localhost:8101/payments/1/days/5
 - Pode mudar o número do id, que sempre retornará a mesma pessoa, já que foi um objeto mocado.
 
+5 - Fazer um projeto comunicar com o outro, usando, por enquanto, o RestTemplate.
+- RestTemplate é a maneira clássica de comunicar um projeto com o outro usando web service.
+- Pra usar um RestTemplate, será criado um @Bean, que é um objeto, uma instancia única que fica disponível para o projeto.
+- Criado um pacote config, e uma classe AppConfig, com configurações do projeto. Tem que colocar a annotation @Configuration
+    * Criado um método que retorna um RestTemplate. Ele registra uma instancia única, um singleton, do RestTemplate.
+    * Essa instância única fica disponível para injetar em outros componentes. 
+    * Cria um componente a partir de uma chamada de método, com a annotation @Bean. Não usa o @Componente na classe.
+     ** Por exemplo:
+     @Component /não usar dessa forma
+     public class AppConfig {
+
+         @Bean //forma correta, a partir de uma chamda de método
+         public RestTemplate restTemplate(){}
+     }
+- Injetado dependência do RestTemplate na classe service.
+
+-Criar uma propriedade do host, no arquivo properties.
+    * hr-worker.host=http://localhost:8001
+
+- Na classe PaymentService, colocar a annotation @Value para usar a propriedade do host.
+    * @Value("${hr-worker.host}")
+        private String workerHost;
+
+ - Fazer uma requisição para uma API externa usando RestTemplate
+ - Criado um objeto Worker no método getPayment. Como não tem a classe Worker nesse projeto, foi criado uma classe igual a que está no projeto hr-worker, mas sem as annotations.
+ - Esse projeto não tem JPA, por isso que precisa apenas da estrutura do classe Worker.
+ - Como passar parametros numa requisição RestTemplate, usando getForObject?
+    * tem que criar um mapa, ou dicionário de parametros. Usar a classe Map, collections de chave e valor.
+    * Map<String, String> -> String String pq os parametros de HTTP são apenas Strings.
+    
+
+
 
