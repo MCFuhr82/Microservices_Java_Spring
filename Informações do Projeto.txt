@@ -98,6 +98,31 @@ Projeto de Microsserviços -
 - Pode apagar o Map do método também. Não precisará mais.
 - Lembrar de usar o .getBody(), para pegar o corpo do objeto ResponseEntity.
 
+7 - Ribbon, balanceador de carga
+- adicionado a dependencia do Ribbon no arquivo pom.xml
+- o projeto hr-payroll que vai chamar o microsserviço do hr-workers. O projeto hr-payroll é um cliente Ribbon
+- essa chamada será com balanceamento de cargas
+
+- Para informar que é um cliente Ribbon, adicionar a annotation @RibbonClient na classe principal
+    * De quem vai ser cliente? Do outro microsserviço, hr-worker.
+    * Por isso, adicionar como parâmetro o name = "hr-worker"
+
+- No arquivo .properties, adicionar as possíveis portas que poderão ser usadas.
+    * hr-worker.ribbon.listOfServers=localhost:8001, localhost:8002
+- Para o exercício, informado apenas duas portas estáticas, no hardcode.
+- Depois, será tudo automático.
+
+- Para testar, adicionar injeção de dependência da classe Enviroment, no projeto hr-worker, classe WorkerController
+- Criado um atributo looger, somente para mostrar em qual porta está rodando.
+
+- Para rodar duas instâncias diferentes do worker, botão direito na aplicação principal, run As, run configuration.
+    * Selecionar o hr-worker do Spring Boot App.
+    * Alterar o nome para hr-worker - HrWorkerApplication8001
+    * Na aba Arguments, em VM Arguments adicionar -Dserver.port=8001 e apply
+    * Clicar em hr-worker - HrWorkerApplication8001 e duplicar, e alterar nome para 8002 e mudar no VM Arguments tb
+
+
+
 
 
 
