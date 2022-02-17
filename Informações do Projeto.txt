@@ -121,7 +121,9 @@ Projeto de Microsserviços -
     * Na aba Arguments, em VM Arguments adicionar -Dserver.port=8001 e apply
     * Clicar em hr-worker - HrWorkerApplication8001 e duplicar, e alterar nome para 8002 e mudar no VM Arguments tb
 
-
+FASE 2
+8 - Eureka Server 
+- Criado novo projeto, adiconando como dependência o Eureka Server
 
 
 
